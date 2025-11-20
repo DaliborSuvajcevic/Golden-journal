@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golden Trading Journal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Golden Trading Journal</h1>
+    </div>
+    
+    <div class="card">
+      <h2 style="color: #FFD700; margin-bottom: 20px;">Daily Trade Entry</h2>
+      
+      <div class="form-group">
+        <label for="pair">Pair</label>
+        <input type="text" id="pair" class="form-control" placeholder="e.g., EUR/USD">
+      </div>
+      
+      <div class="form-group">
+        <label for="direction">Direction</label>
+        <select id="direction" class="form-control">
+          <option value="">Select Direction</option>
+          <option value="Buy">Buy</option>
+          <option value="Sell">Sell</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="entryPrice">Entry Price</label>
+        <input type="number" id="entryPrice" class="form-control" step="0.0001">
+      </div>
+      
+      <div class="form-group">
+        <label for="tp">Take Profit</label>
+        <input type="number" id="tp" class="form-control" step="0.0001">
+      </div>
+      
+      <div class="form-group">
+        <label for="sl">Stop Loss</label>
+        <input type="number" id="sl" class="form-control" step="0.0001">
+      </div>
+      
+      <div class="form-group">
+        <label for="lotSize">Lot Size</label>
+        <input type="number" id="lotSize" class="form-control" step="0.01">
+      </div>
+      
+      <div class="form-group">
+        <label for="riskPercent">Risk %</label>
+        <input type="number" id="riskPercent" class="form-control" step="0.1">
+      </div>
+      
+      <div class="form-group">
+        <label for="result">Result</label>
+        <select id="result" class="form-control">
+          <option value="">Select Result</option>
+          <option value="Win">Win</option>
+          <option value="Loss">Loss</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="notes">Notes</label>
+        <textarea id="notes" class="form-control" rows="3" placeholder="Additional notes..."></textarea>
+      </div>
+      
+      <button class="btn btn-primary" onclick="saveTrade()">Save Trade</button>
+    </div>
+    
+    <div class="card">
+      <h2 style="color: #FFD700; margin-bottom: 15px;">Recent Trades</h2>
+      <div class="trades-list" id="tradesList">
+        <!-- Trades will be populated here -->
+      </div>
+    </div>
+    
+    <div class="card">
+      <h2 style="color: #FFD700; margin-bottom: 15px;">Quick Actions</h2>
+      <button class="btn btn-secondary" onclick="showStats()">My Stats</button>
+      <button class="btn btn-secondary" style="margin-top: 10px;" onclick="confirmReset()">Reset Journal</button>
+      <button class="btn btn-secondary" style="margin-top: 10px;"><a href="https://daliborsuvajcevic.github.io/the-golden-circle/">Nazad na Početnu</a></button>
+    </div>
+  </div>
+  
+  <!-- Trade Details Modal -->
+  <div class="modal" id="tradeDetailsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Trade Details</h2>
+      </div>
+      <div class="trade-details-content" id="tradeDetailsContent">
+        <!-- Details will be populated here -->
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="closeModal('tradeDetailsModal')">Close</button>
+        <button class="btn btn-primary" onclick="editTrade()">Edit</button>
+      </div>
+      <button class="btn btn-secondary" style="margin-top: 10px;" onclick="deleteTrade()">Delete Trade</button>
+    </div>
+  </div>
+  
+  <!-- Stats Modal -->
+  <div class="modal" id="statsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Trading Statistics</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Total Trades</div>
+          <div class="stat-value" id="totalTrades">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Win Rate</div>
+          <div class="stat-value" id="winRate">0%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Avg R:R</div>
+          <div class="stat-value" id="avgRR">0.00</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Biggest Win</div>
+          <div class="stat-value" id="biggestWin">0</div>
+        </div>
+      </div>
+      <div class="equity-curve">
+        <div class="curve-line"></div>
+        <svg class="curve-graph" viewBox="0 0 400 100">
+          <path class="curve-path" d="M0,80 Q100,60 200,70 T400,50"></path>
+        </svg>
+      </div>
+      <button class="btn btn-secondary" onclick="closeModal('statsModal')">Close</button>
+    </div>
+  </div>
+  
+  <!-- Confirmation Modal -->
+  <div class="modal" id="confirmModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Confirm Action</h2>
+      </div>
+      <p>Are you sure you want to reset your entire trading journal? This cannot be undone.</p>
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="closeModal('confirmModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="resetJournal()">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
