@@ -27,7 +27,7 @@ let currentHeatmapMonth = new Date();
 
 // === API CONFIG ===
 // Prazno = relativna putanja, radi na Vercel-u gde su frontend i /api na istom domenu
-const API_BASE_URL = 'golden-journal-9yom8bug4-daliborsuvajcevics-projects.vercel.app';
+const API_BASE_URL = 'golden-journal-p0clxmcmo-daliborsuvajcevics-projects.vercel.app';
 
 // Configure Decimal.js for maximum precision
 if (typeof Decimal !== 'undefined') {
